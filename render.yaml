@@ -2,13 +2,11 @@ services:
   - type: web
     name: spiderfoot
     runtime: docker
-    plan: starter              # or standard/pro as needed
+    plan: starter
     dockerfilePath: ./Dockerfile
-    envVars:
-      - key: PORT              # Render injects PORT; SpiderFoot must bind to it
-        value: "5001"          # value is optional; we use it for clarity
-    startCommand: python3 ./sf.py -l 0.0.0.0:$PORT
-    disks:
-      - name: spiderfoot-db
-        mountPath: /opt/render/.spiderfoot
-        sizeGB: 2              # adjust to your expected data volume
+    dockerCommand: python3 ./sf.py -l 0.0.0.0:$PORT
+    # healthCheckPath: "/"   # optional; SpiderFoot serves on /
+    disk:
+      name: spiderfoot-data
+      mountPath: /root/.spiderfoot
+      sizeGB: 2
