@@ -3,7 +3,7 @@ services:
     name: spiderfoot
     runtime: docker
     dockerfilePath: ./Dockerfile
-    dockerCommand: python3 ./sf.py -l 0.0.0.0:$PORT -max-threads 2 -x
+    dockerCommand: python3 ./sf.py -l 0.0.0.0:$PORT -max-threads 1 -x
     disk:
       name: spiderfoot-data
       mountPath: /root/.spiderfoot
